@@ -9,7 +9,7 @@ pygame.display.set_caption("Comet fall Game")
 screen = pygame.display.set_mode((1080, 720))
 
 # Importer charger à l'arrière plan
-background = pygame.image.load('assets/bg.jpg')
+background = pygame.image.load('./assets/bg.jpg')
 
 # Charger notre jeu
 game = Game()
@@ -24,7 +24,16 @@ while running:
     # appliquer l'image de mon joueur
     screen.blit(game.player.image, game.player.rect)
 
-# verifier si le joueur souhaite aller à gauche ou à droite et collision des limites de l'écran 
+    #Récuperer les projectile du joueur
+
+    for projectile in game.player.all_projectiles:
+        projectile.move()
+
+    # appliquer l'ensemble des images du groupe de projectiles
+
+    game.player.all_projectiles.draw(screen)
+
+# verifier si le joueur souhaite aller à gauche ou à droite et collision des limites de l'écran
 
     if game.pressed.get(pygame.K_RIGHT) and game.player.rect.x + game.player.rect.width < screen.get_width():
         game.player.move_right()
@@ -42,5 +51,10 @@ while running:
         # detecter si un joueur lache une touche du clavier
         elif event.type == pygame.KEYDOWN:
             game.pressed[event.key] = True
+
+        # détecter si la touche espace est enclenchée pour lancer notre projectile
+            if event.key == pygame.K_SPACE:
+
+                game.player.launch_projectile()
         elif event.type == pygame.KEYUP:
             game.pressed[event.key] = False
