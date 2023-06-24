@@ -1,9 +1,10 @@
-import pygame
-from player import Player
+from .player import Player
+
 
 # Créer une classe Game
+
 class Game:
     def __init__(self):
-        #génerer notre joueur
+        # générer notre joueur
         self.player = Player()
-
+        self.pressed = {}
