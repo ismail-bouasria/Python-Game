@@ -29,9 +29,16 @@ while running:
     for projectile in game.player.all_projectiles:
         projectile.move()
 
+    # Récuperer les monstre d enotre jeu
+    for monster in game.all_monsters:
+        monster.forward()
+
     # appliquer l'ensemble des images du groupe de projectiles
 
     game.player.all_projectiles.draw(screen)
+
+    #appliquer l'ensemble des images de mon groupe de monstre
+    game.all_monsters.draw(screen)
 
 # verifier si le joueur souhaite aller à gauche ou à droite et collision des limites de l'écran
 
