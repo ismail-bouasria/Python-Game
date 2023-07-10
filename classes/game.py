@@ -17,10 +17,19 @@ class Game:
         self.all_players.add(self.player)
         self.all_monsters = pygame.sprite.Group()
         self.pressed = {}
+
+    def start(self):
+        self.is_playing = True
         self.spawn_monster()
         self.spawn_monster()
 
-    def update(self,screen):
+    def game_over(self):
+        # Fin de partie et relancer le jeu
+        self.all_monsters = pygame.sprite.Group()
+        self.player.health = self.player.max_health
+        self.is_playing = False
+
+    def update(self, screen):
         # appliquer l'image de mon joueur
         screen.blit(self.player.image, self.player.rect)
 

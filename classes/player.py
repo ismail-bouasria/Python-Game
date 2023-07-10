@@ -1,7 +1,6 @@
 import pygame
 from .projectile import Projectile
 
-
 # Créer une classe Player
 class Player(pygame.sprite.Sprite):
     def __init__(self, game):
@@ -17,9 +16,13 @@ class Player(pygame.sprite.Sprite):
         self.rect.x = 400
         self.rect.y = 500
 
+
     def damage(self, amount):
         if self.health - amount > amount:
             self.health -= amount
+        else:
+            # si le joueur n'a plus de point de vie
+            self.game.game_over()
 
     def launch_projectile(self):
         # créer une instance de la classe projectile

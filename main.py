@@ -71,4 +71,4 @@ while running:
 
             if play_button_rect.collidepoint(event.pos):
                 # mettre  le jeu en mode "lancé"
-                game.is_playing = True
+                game.start()
