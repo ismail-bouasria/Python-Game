@@ -22,7 +22,8 @@ class Projectile(pygame.sprite.Sprite):
         # faire tourné le projectile
         self.angle += 8
         self.image = pygame.transform.rotozoom(self.origin_image, self.angle, 1)
-        self.rect = self.image.get_rect(center =self.rect.center)
+        self.rect = self.image.get_rect(center=self.rect.center)
+
     def remove(self):
         self.player.all_projectiles.remove(self)
         print('projectile supprimé')
@@ -32,9 +33,11 @@ class Projectile(pygame.sprite.Sprite):
         self.rotate()
 
         # Vérifier si le projectile entre en collision avec un monstre
-        if self.player.game.check_collision(self,self.player.game.all_monsters):
-            #supprimer le projectile
+        for monster in self.player.game.check_collision(self, self.player.game.all_monsters):
+            # supprimer le projectile
             self.remove()
+            # infliger des dégats
+            monster.damage(self.player.attack)
         # vérifier si notre projectile n'est plus présent de l'écran
         if self.rect.x > 1080:
             # supprimer le projectile

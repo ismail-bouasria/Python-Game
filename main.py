@@ -24,6 +24,9 @@ while running:
     # appliquer l'image de mon joueur
     screen.blit(game.player.image, game.player.rect)
 
+    # Axtualiser la barre du joueur
+    game.player.update_health_bar(screen)
+
     # Récuperer les projectile du joueur
 
     for projectile in game.player.all_projectiles:
